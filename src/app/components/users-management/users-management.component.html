@@ -1,0 +1,128 @@
+<div class="container col-md-8">
+  <div class="row">
+      <h1>
+        <span class="text-center">{{ title }} </span>
+      </h1>
+  </div>
+<br>
+<div class="container col-md-8">
+  <h3>Parametros de busqueda</h3>
+  <div class="row" id="grouper">
+    <div class="col">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" (click)="findUsers()">
+          Consultar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="clear()">
+          Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="name@example.com"
+          [formControl]="name"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container col-md-8">
+  <h3>Lista de usuarios</h3>
+
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <th>id</th>
+          <th>usuarios</th>
+          <th>rol</th>
+          <th>activo</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of userList"
+            (click)="viewUserInfo(item.id_usuario)"
+            class="table-active" >
+            <td>{{ item.id_usuario }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.rol.nombre }}</td>
+            <td>{{ item.activo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container col-md-8">
+  <h3>Informacion del usuario</h3>
+
+  <form action="" [formGroup]="userForm">
+    <div class="row">
+      <div class="col">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-primary"  (click)="createUser()"  >Guardar</button>
+          <button type="button" class="btn btn-primary"  (click)="updateUser()"  >Editar</button>
+          <button type="button" class="btn btn-primary" (click)="deleteUser()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="mb-3 row">
+      <div class="col-md-2">
+        <label  class="form-label">ID</label>
+      </div>
+      <div class="col-md-10">  
+        <input type="text" class="form-control" formControlName="id_usuario" readonly/>
+      </div>
+    </div>
+   
+
+    <div class="mb-3 row">
+      <div class="col-md-2">
+        <label  class="form-label">Nombre</label>
+      </div>
+      <div class="col-md-10">  
+        <input type="text" class="form-control" formControlName="nombre" />
+      </div>
+    </div>
+
+  
+    <div class="mb-3 row">
+      <div class="col-md-2">
+        <label  class="form-label">Rol</label>
+      </div>
+      <div class="col-md-10">  
+
+          <select formControlName="id_rol" class="form-select">
+            <option [value]="item.id_rol" *ngFor="let item of rolList">{{item.nombre}}</option>
+          </select>
+
+      </div>
+    </div>
+
+
+    <div class="mb-3 row">
+      <div class="col-md-2">
+          <label for="exampleFormControlInput1" class="col-form-label">Activo</label>
+      </div>
+      <div class="col-md-2">  
+        <label for="exampleFormControlInput1" class="col-form-label" >si</label>
+        <input  type="radio"   formControlName="activo"  value="1"/>
+        </div>
+        <div class="col-md-2">  
+        <label for="exampleFormControlInput1" class="col-form-label"   >no</label>
+        <input  type="radio"   formControlName="activo"  value="0"/>
+      </div>
+    </div>
+  </form>
+</div>
