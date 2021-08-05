@@ -11,8 +11,14 @@ export class UsersManagementComponent implements OnInit {
   userList: any[] = [];
   name = new FormControl('');
   title = 'Gestion de usuarios';
+  
+  btnSave:boolean = true;   
+  btnEdit:boolean = true;  
+  btnDelete:boolean = true;  
 
-  userForm = new FormGroup({
+
+
+    userForm = new FormGroup({
     id_usuario: new FormControl(''),
     nombre: new FormControl('', Validators.required),
     id_rol: new FormControl('', Validators.required),
@@ -48,7 +54,11 @@ export class UsersManagementComponent implements OnInit {
         nombre: response.user.nombre,
         id_rol: response.user.rol.id_rol,
         activo: response.user.activo,
+        
       });
+      this.btnSave = true;
+      this.btnEdit = false;
+      this.btnDelete = false;
     });
   }
 
@@ -157,8 +167,15 @@ export class UsersManagementComponent implements OnInit {
         }
       });
     }else{
-
       alert("no ha seleccionado registro para eliminar")
     }
   }
+
+  enableBtnSave(){
+    this.btnSave = false;
+    this.btnEdit = true;
+    this.btnDelete = true;  
+    this.clear2();
+  }
+
 }

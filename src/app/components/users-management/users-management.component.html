@@ -37,9 +37,16 @@
 <br>
 <div class="container col-md-8">
   <h3>Lista de usuarios</h3>
-
   <div class="row">
     <div class="col">
+      <div class="btn-group" role="group" aria-label="Basic example" (click)="enableBtnSave()">
+    <button type="button" class="btn btn-primary"  >Crear</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
       <table class="table">
         <thead>
           <th>id</th>
@@ -55,7 +62,11 @@
             <td>{{ item.id_usuario }}</td>
             <td>{{ item.nombre }}</td>
             <td>{{ item.rol.nombre }}</td>
-            <td>{{ item.activo }}</td>
+            <td *ngIf=" item.activo  == 1"  >si</td>
+            <td *ngIf=" item.activo  == 0"  >no</td>
+
+
+            
           </tr>
         </tbody>
       </table>
@@ -65,14 +76,13 @@
 <br>
 <div class="container col-md-8">
   <h3>Informacion del usuario</h3>
-
   <form action="" [formGroup]="userForm">
     <div class="row">
       <div class="col">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary"  (click)="createUser()"  >Guardar</button>
-          <button type="button" class="btn btn-primary"  (click)="updateUser()"  >Editar</button>
-          <button type="button" class="btn btn-primary" (click)="deleteUser()">Eliminar</button>
+          <button type="button" class="btn btn-primary"  (click)="createUser()" [disabled]="btnSave" >Guardar</button>
+          <button type="button" class="btn btn-primary"  (click)="updateUser()" [disabled]="btnEdit" >Editar</button>
+          <button type="button" class="btn btn-primary" (click)="deleteUser()"  [disabled]="btnDelete" >Eliminar</button>
         </div>
       </div>
     </div>
